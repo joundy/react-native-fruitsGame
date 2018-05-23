@@ -1,0 +1,40 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+    var fruits = [{
+        name: 'avocado',
+        image: _require(_dependencyMap[0], './1.png')
+    }, {
+        name: 'orange',
+        image: _require(_dependencyMap[1], './2.png')
+    }, {
+        name: 'lime',
+        image: _require(_dependencyMap[2], './3.png')
+    }, {
+        name: 'star fruit',
+        image: _require(_dependencyMap[3], './6.png')
+    }, {
+        name: 'mangosteen',
+        image: _require(_dependencyMap[4], './8.png')
+    }, {
+        name: 'apple',
+        image: _require(_dependencyMap[5], './9.png')
+    }, {
+        name: 'pear',
+        image: _require(_dependencyMap[6], './10.png')
+    }, {
+        name: 'kiwi',
+        image: _require(_dependencyMap[7], './11.png')
+    }, {
+        name: 'strawberry',
+        image: _require(_dependencyMap[8], './12.png')
+    }, {
+        name: 'coconut',
+        image: _require(_dependencyMap[9], './13.png')
+    }, {
+        name: 'watermelon',
+        image: _require(_dependencyMap[10], './14.png')
+    }];
+    exports.default = fruits;
+});

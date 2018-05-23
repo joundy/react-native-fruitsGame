@@ -1,0 +1,224 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+
+    var _react2 = _require(_dependencyMap[0], "react");
+
+    var _react3 = _interopRequireDefault(_react2);
+
+    var _index = _require(_dependencyMap[1], "./../../node_modules/react-transform-hmr/lib/index.js");
+
+    var _index2 = _interopRequireDefault(_index);
+
+    var _jsxFileName = "/home/neo/NodeJS/Rn/fruits/app/screens/Main.js";
+
+    var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+    var _reactNative = _require(_dependencyMap[2], "react-native");
+
+    var _nativeBase = _require(_dependencyMap[3], "native-base");
+
+    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+    function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+    function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+    var _components = {
+        Main: {
+            displayName: "Main"
+        }
+    };
+
+    var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+        filename: "/home/neo/NodeJS/Rn/fruits/app/screens/Main.js",
+        components: _components,
+        locals: [module],
+        imports: [_react3.default]
+    });
+
+    function _wrapComponent(id) {
+        return function (Component) {
+            return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+        };
+    }
+
+    var Main = _wrapComponent("Main")(function (_Component) {
+        _inherits(Main, _Component);
+
+        function Main() {
+            _classCallCheck(this, Main);
+
+            return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+        }
+
+        _createClass(Main, [{
+            key: "render",
+            value: function render() {
+                var _this2 = this;
+
+                return _react3.default.createElement(
+                    _nativeBase.Container,
+                    {
+                        style: styles.wrapper.container,
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 8
+                        }
+                    },
+                    _react3.default.createElement(
+                        _nativeBase.Container,
+                        {
+                            style: styles.header.container,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 9
+                            }
+                        },
+                        _react3.default.createElement(_reactNative.Image, {
+                            source: _require(_dependencyMap[4], '../assets/images/logo.png'),
+                            resizeMode: "contain",
+                            style: styles.header.logo,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 10
+                            }
+                        }),
+                        _react3.default.createElement(
+                            _nativeBase.Text,
+                            {
+                                style: styles.header.textMain,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 11
+                                }
+                            },
+                            "Fruits"
+                        ),
+                        _react3.default.createElement(
+                            _nativeBase.Text,
+                            {
+                                style: styles.header.textChild,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 12
+                                }
+                            },
+                            "React Native Game"
+                        )
+                    ),
+                    _react3.default.createElement(
+                        _nativeBase.Container,
+                        {
+                            style: styles.main.container,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 14
+                            }
+                        },
+                        _react3.default.createElement(
+                            _nativeBase.Button,
+                            {
+                                rounded: true,
+                                style: styles.main.button,
+                                onPress: function onPress() {
+                                    return _this2.props.navigation.navigate('Start');
+                                },
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 15
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nativeBase.Text,
+                                {
+                                    style: styles.main.buttonText,
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 16
+                                    }
+                                },
+                                "Start"
+                            )
+                        ),
+                        _react3.default.createElement(
+                            _nativeBase.Button,
+                            {
+                                rounded: true,
+                                style: styles.main.button,
+                                onPress: function onPress() {
+                                    return _this2.props.navigation.navigate('About');
+                                },
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 18
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nativeBase.Text,
+                                {
+                                    style: styles.main.buttonText,
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 19
+                                    }
+                                },
+                                "About"
+                            )
+                        )
+                    )
+                );
+            }
+        }]);
+
+        return Main;
+    }(_react2.Component));
+
+    exports.default = Main;
+    var styles = {
+        wrapper: _reactNative.StyleSheet.create({
+            container: {
+                backgroundColor: '#F23049'
+            }
+        }),
+        header: _reactNative.StyleSheet.create({
+            container: {
+                alignItems: 'center',
+                justifyContent: 'center'
+            },
+            logo: {
+                width: 100,
+                height: 100
+            },
+            textMain: {
+                fontSize: 40,
+                color: 'white'
+            },
+            textChild: {
+                color: 'white'
+            }
+        }),
+        main: _reactNative.StyleSheet.create({
+            container: {
+                alignItems: 'center',
+                justifyContent: 'center'
+            },
+            button: {
+                width: 200,
+                justifyContent: 'center',
+                margin: 5,
+                backgroundColor: '#ff4961',
+                shadowOffset: {
+                    height: 0,
+                    width: 0
+                },
+                shadowOpacity: 0,
+                elevation: 0,
+                alignSelf: 'center'
+            }
+        })
+    };
+});

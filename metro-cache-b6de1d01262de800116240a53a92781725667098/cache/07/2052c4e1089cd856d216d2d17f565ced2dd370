@@ -1,0 +1,223 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+  var _reactNative = _require(_dependencyMap[0], "react-native");
+
+  var _reactNative2 = _interopRequireDefault(_reactNative);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+  var Voice = _reactNative.NativeModules.Voice;
+  var voiceEmitter = _reactNative.Platform.OS !== "web" ? new _reactNative.NativeEventEmitter(Voice) : null;
+
+  var RCTVoice = function () {
+    function RCTVoice() {
+      _classCallCheck(this, RCTVoice);
+
+      this._loaded = false;
+      this._listeners = null;
+      this._events = {
+        'onSpeechStart': this._onSpeechStart.bind(this),
+        'onSpeechRecognized': this._onSpeechRecognized.bind(this),
+        'onSpeechEnd': this._onSpeechEnd.bind(this),
+        'onSpeechError': this._onSpeechError.bind(this),
+        'onSpeechResults': this._onSpeechResults.bind(this),
+        'onSpeechPartialResults': this._onSpeechPartialResults.bind(this),
+        'onSpeechVolumeChanged': this._onSpeechVolumeChanged.bind(this)
+      };
+    }
+
+    _createClass(RCTVoice, [{
+      key: "removeAllListeners",
+      value: function removeAllListeners() {
+        Voice.onSpeechStart = null;
+        Voice.onSpeechRecognized = null;
+        Voice.onSpeechEnd = null;
+        Voice.onSpeechError = null;
+        Voice.onSpeechResults = null;
+        Voice.onSpeechPartialResults = null;
+        Voice.onSpeechVolumeChanged = null;
+      }
+    }, {
+      key: "destroy",
+      value: function destroy() {
+        var _this = this;
+
+        if (!this._loaded && !this._listeners) {
+          return Promise.resolve();
+        }
+
+        return new Promise(function (resolve, reject) {
+          Voice.destroySpeech(function (error) {
+            if (error) {
+              reject(new Error(error));
+            } else {
+              if (_this._listeners) {
+                _this._listeners.map(function (listener, index) {
+                  return listener.remove();
+                });
+
+                _this._listeners = null;
+              }
+
+              resolve();
+            }
+          });
+        });
+      }
+    }, {
+      key: "start",
+      value: function start(locale) {
+        var _this2 = this;
+
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+        if (!this._loaded && !this._listeners && voiceEmitter !== null) {
+          this._listeners = Object.keys(this._events).map(function (key, index) {
+            return voiceEmitter.addListener(key, _this2._events[key]);
+          });
+        }
+
+        return new Promise(function (resolve, reject) {
+          var callback = function callback(error) {
+            if (error) {
+              reject(new Error(error));
+            } else {
+              resolve();
+            }
+          };
+
+          if (_reactNative.Platform.OS === 'android') {
+            Voice.startSpeech(locale, _extends({
+              EXTRA_LANGUAGE_MODEL: "LANGUAGE_MODEL_FREE_FORM",
+              EXTRA_MAX_RESULTS: 5,
+              EXTRA_PARTIAL_RESULTS: true,
+              REQUEST_PERMISSIONS_AUTO: true
+            }, options), callback);
+          } else {
+            Voice.startSpeech(locale, callback);
+          }
+        });
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        if (!this._loaded && !this._listeners) {
+          return Promise.resolve();
+        }
+
+        return new Promise(function (resolve, reject) {
+          Voice.stopSpeech(function (error) {
+            if (error) {
+              reject(new Error(error));
+            } else {
+              resolve();
+            }
+          });
+        });
+      }
+    }, {
+      key: "cancel",
+      value: function cancel() {
+        if (!this._loaded && !this._listeners) {
+          return Promise.resolve();
+        }
+
+        return new Promise(function (resolve, reject) {
+          Voice.cancelSpeech(function (error) {
+            if (error) {
+              reject(new Error(error));
+            } else {
+              resolve();
+            }
+          });
+        });
+      }
+    }, {
+      key: "isAvailable",
+      value: function isAvailable() {
+        return new Promise(function (resolve, reject) {
+          Voice.isSpeechAvailable(function (isAvailable, error) {
+            if (error) {
+              reject(new Error(error));
+            } else {
+              resolve(isAvailable);
+            }
+          });
+        });
+      }
+    }, {
+      key: "isRecognizing",
+      value: function isRecognizing() {
+        return new Promise(function (resolve, reject) {
+          Voice.isRecognizing(function (isRecognizing) {
+            return resolve(isRecognizing);
+          });
+        });
+      }
+    }, {
+      key: "_onSpeechStart",
+      value: function _onSpeechStart(e) {
+        if (this.onSpeechStart) {
+          this.onSpeechStart(e);
+        }
+      }
+    }, {
+      key: "_onSpeechRecognized",
+      value: function _onSpeechRecognized(e) {
+        if (this.onSpeechRecognized) {
+          this.onSpeechRecognized(e);
+        }
+      }
+    }, {
+      key: "_onSpeechEnd",
+      value: function _onSpeechEnd(e) {
+        if (this.onSpeechEnd) {
+          this.onSpeechEnd(e);
+        }
+      }
+    }, {
+      key: "_onSpeechError",
+      value: function _onSpeechError(e) {
+        if (this.onSpeechError) {
+          this.onSpeechError(e);
+        }
+      }
+    }, {
+      key: "_onSpeechResults",
+      value: function _onSpeechResults(e) {
+        if (this.onSpeechResults) {
+          this.onSpeechResults(e);
+        }
+      }
+    }, {
+      key: "_onSpeechPartialResults",
+      value: function _onSpeechPartialResults(e) {
+        if (this.onSpeechPartialResults) {
+          this.onSpeechPartialResults(e);
+        }
+      }
+    }, {
+      key: "_onSpeechVolumeChanged",
+      value: function _onSpeechVolumeChanged(e) {
+        if (this.onSpeechVolumeChanged) {
+          this.onSpeechVolumeChanged(e);
+        }
+      }
+    }]);
+
+    return RCTVoice;
+  }();
+
+  exports.default = new RCTVoice();
+});

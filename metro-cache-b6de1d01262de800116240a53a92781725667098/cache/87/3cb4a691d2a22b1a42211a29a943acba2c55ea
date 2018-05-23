@@ -1,0 +1,474 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+
+    var _react2 = _require(_dependencyMap[0], "react");
+
+    var _react3 = _interopRequireDefault(_react2);
+
+    var _index = _require(_dependencyMap[1], "./../../node_modules/react-transform-hmr/lib/index.js");
+
+    var _index2 = _interopRequireDefault(_index);
+
+    var _jsxFileName = "/home/neo/NodeJS/Rn/fruits/app/screens/Start.js";
+
+    var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+    var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+    var _reactNative = _require(_dependencyMap[2], "react-native");
+
+    var _nativeBase = _require(_dependencyMap[3], "native-base");
+
+    var _reactNativeVoice = _require(_dependencyMap[4], "react-native-voice");
+
+    var _reactNativeVoice2 = _interopRequireDefault(_reactNativeVoice);
+
+    var _fruits = _require(_dependencyMap[5], "../assets/fruits/fruits");
+
+    var _fruits2 = _interopRequireDefault(_fruits);
+
+    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+    function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+    function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+    var _components = {
+        Start: {
+            displayName: "Start"
+        }
+    };
+
+    var _node_modulesReactTransformHmrLibIndexJs2 = (0, _index2.default)({
+        filename: "/home/neo/NodeJS/Rn/fruits/app/screens/Start.js",
+        components: _components,
+        locals: [module],
+        imports: [_react3.default]
+    });
+
+    function _wrapComponent(id) {
+        return function (Component) {
+            return _node_modulesReactTransformHmrLibIndexJs2(Component, id);
+        };
+    }
+
+    var Start = _wrapComponent("Start")(function (_Component) {
+        _inherits(Start, _Component);
+
+        function Start(props) {
+            _classCallCheck(this, Start);
+
+            var _this = _possibleConstructorReturn(this, (Start.__proto__ || Object.getPrototypeOf(Start)).call(this));
+
+            _this.state = {
+                voice: {
+                    onSpeechStartHandler: {
+                        error: null
+                    },
+                    onSpeechEndHandler: {
+                        error: null
+                    },
+                    onSpeechResultsHandler: {
+                        value: ['...']
+                    }
+                },
+                fruit: {
+                    name: ''
+                }
+            };
+
+            _this.componentDidMount = function () {
+                _this.handleRandom();
+            };
+
+            _this.handleRandom = function () {
+                _this.setState({
+                    fruit: _fruits2.default[Math.floor(Math.random() * _fruits2.default.length)]
+                });
+
+                _this.handleReset();
+            };
+
+            _this.handleReset = function () {
+                _this.setState({
+                    voice: _extends({}, _this.state.voice, {
+                        onSpeechStartHandler: {
+                            error: null
+                        },
+                        onSpeechEndHandler: {
+                            error: null
+                        },
+                        onSpeechResultsHandler: {
+                            value: ['...']
+                        }
+                    })
+                });
+            };
+
+            _this.onSpeechStartHandler = function (res) {
+                _this.setState({
+                    voice: _extends({}, _this.state.voice, {
+                        onSpeechStartHandler: res
+                    })
+                });
+            };
+
+            _this.onSpeechEndHandler = function (res) {
+                if (res.error == false) {
+                    _this.handleReset();
+                }
+            };
+
+            _this.onSpeechResultsHandler = function (res) {
+                _this.setState({
+                    voice: _extends({}, _this.state.voice, {
+                        onSpeechResultsHandler: res
+                    })
+                });
+            };
+
+            _reactNativeVoice2.default.onSpeechStart = _this.onSpeechStartHandler.bind(_this);
+            _reactNativeVoice2.default.onSpeechEnd = _this.onSpeechEndHandler.bind(_this);
+            _reactNativeVoice2.default.onSpeechResults = _this.onSpeechResultsHandler.bind(_this);
+            return _this;
+        }
+
+        _createClass(Start, [{
+            key: "onStartButtonPress",
+            value: function onStartButtonPress(e) {
+                _reactNativeVoice2.default.start('en-US');
+            }
+        }, {
+            key: "render",
+            value: function render() {
+                var _this2 = this;
+
+                return _react3.default.createElement(
+                    _nativeBase.Container,
+                    {
+                        style: styles.wrapper.container,
+                        __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 97
+                        }
+                    },
+                    _react3.default.createElement(
+                        _nativeBase.Container,
+                        {
+                            style: styles.header.container,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 99
+                            }
+                        },
+                        _react3.default.createElement(
+                            _reactNative.TouchableNativeFeedback,
+                            {
+                                onPress: function onPress() {
+                                    return _this2.props.navigation.goBack();
+                                },
+                                background: _reactNative.TouchableNativeFeedback.SelectableBackgroundBorderless(),
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 100
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nativeBase.View,
+                                {
+                                    style: styles.header.buttonBack,
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 103
+                                    }
+                                },
+                                _react3.default.createElement(_nativeBase.Icon, {
+                                    style: styles.header.buttonBackIcon,
+                                    name: "ios-arrow-back",
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 104
+                                    }
+                                })
+                            )
+                        ),
+                        _react3.default.createElement(
+                            _nativeBase.Text,
+                            {
+                                style: styles.header.textMain,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 107
+                                }
+                            },
+                            "What fruit is this?"
+                        )
+                    ),
+                    _react3.default.createElement(
+                        _nativeBase.Container,
+                        {
+                            style: styles.fruit.container,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 109
+                            }
+                        },
+                        _react3.default.createElement(
+                            _nativeBase.View,
+                            {
+                                style: styles.fruit.circle,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 110
+                                }
+                            },
+                            _react3.default.createElement(_reactNative.Image, {
+                                style: styles.fruit.image,
+                                source: this.state.fruit.image,
+                                resizeMode: "contain",
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 111
+                                }
+                            })
+                        ),
+                        _react3.default.createElement(
+                            _nativeBase.View,
+                            {
+                                style: styles.fruit.resultContainer,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 113
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nativeBase.View,
+                                {
+                                    style: styles.fruit.nameContainer,
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 114
+                                    }
+                                },
+                                _react3.default.createElement(
+                                    _nativeBase.Text,
+                                    {
+                                        __source: {
+                                            fileName: _jsxFileName,
+                                            lineNumber: 115
+                                        }
+                                    },
+                                    this.state.voice.onSpeechResultsHandler.value[0]
+                                )
+                            ),
+                            _react3.default.createElement(
+                                _nativeBase.View,
+                                {
+                                    style: styles.fruit.iconResult,
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 117
+                                    }
+                                },
+                                this.state.voice.onSpeechResultsHandler.value[0].toLowerCase() == this.state.fruit.name.toLowerCase() ? _react3.default.createElement(_nativeBase.Icon, {
+                                    style: {
+                                        color: '#1ccc4e'
+                                    },
+                                    name: "md-checkmark",
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 119
+                                    }
+                                }) : this.state.voice.onSpeechResultsHandler.value[0] !== '...' ? _react3.default.createElement(_nativeBase.Icon, {
+                                    style: {
+                                        color: '#cc1b24'
+                                    },
+                                    name: "md-close",
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 123
+                                    }
+                                }) : null
+                            )
+                        )
+                    ),
+                    _react3.default.createElement(
+                        _nativeBase.Container,
+                        {
+                            style: styles.main.container,
+                            __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 129
+                            }
+                        },
+                        _react3.default.createElement(
+                            _nativeBase.Button,
+                            {
+                                rounded: true,
+                                style: styles.main.buttonSpeak,
+                                iconRight: true,
+                                onPress: this.onStartButtonPress,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 130
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nativeBase.Text,
+                                {
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 131
+                                    }
+                                },
+                                "Speak"
+                            ),
+                            this.state.voice.onSpeechStartHandler.error == false && this.state.voice.onSpeechEndHandler.error == null ? _react3.default.createElement(_reactNative.ActivityIndicator, {
+                                size: "small",
+                                color: "white",
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 133
+                                }
+                            }) : null
+                        ),
+                        _react3.default.createElement(
+                            _nativeBase.Button,
+                            {
+                                rounded: true,
+                                style: styles.main.buttonReload,
+                                iconRight: true,
+                                onPress: this.handleRandom,
+                                __source: {
+                                    fileName: _jsxFileName,
+                                    lineNumber: 136
+                                }
+                            },
+                            _react3.default.createElement(
+                                _nativeBase.Text,
+                                {
+                                    __source: {
+                                        fileName: _jsxFileName,
+                                        lineNumber: 137
+                                    }
+                                },
+                                "Reload"
+                            )
+                        )
+                    )
+                );
+            }
+        }]);
+
+        return Start;
+    }(_react2.Component));
+
+    exports.default = Start;
+    var styles = {
+        wrapper: _reactNative.StyleSheet.create({
+            container: {
+                backgroundColor: '#F23049'
+            }
+        }),
+        header: _reactNative.StyleSheet.create({
+            container: {
+                alignItems: 'center',
+                justifyContent: 'center'
+            },
+            buttonBack: {
+                position: 'absolute',
+                width: 50,
+                height: 50,
+                justifyContent: 'center',
+                alignItems: 'center',
+                left: 0,
+                top: 0
+            },
+            buttonBackIcon: {
+                color: 'white'
+            },
+            textMain: {
+                fontSize: 25,
+                color: 'white'
+            }
+        }),
+        fruit: _reactNative.StyleSheet.create({
+            container: {
+                justifyContent: 'center',
+                alignItems: 'center'
+            },
+            circle: {
+                width: 170,
+                height: 170,
+                borderRadius: 100,
+                backgroundColor: '#ff4961',
+                justifyContent: 'center',
+                alignItems: 'center'
+            },
+            image: {
+                width: 150,
+                height: 150
+            },
+            resultContainer: {
+                flexDirection: 'row',
+                marginTop: 10
+            },
+            nameContainer: {
+                backgroundColor: 'white',
+                padding: 5,
+                width: 120,
+                height: 40,
+                borderRadius: 100,
+                margin: 2,
+                alignItems: 'center',
+                justifyContent: 'center'
+            },
+            iconResult: {
+                backgroundColor: 'white',
+                height: 40,
+                width: 40,
+                margin: 2,
+                borderRadius: 100,
+                padding: 5,
+                alignItems: 'center',
+                justifyContent: 'center'
+            }
+        }),
+        main: _reactNative.StyleSheet.create({
+            container: {
+                alignItems: 'center',
+                justifyContent: 'center'
+            },
+            buttonSpeak: {
+                width: 200,
+                justifyContent: 'center',
+                margin: 5,
+                backgroundColor: '#56CCF2',
+                shadowOffset: {
+                    height: 0,
+                    width: 0
+                },
+                shadowOpacity: 0,
+                elevation: 0,
+                alignSelf: 'center'
+            },
+            buttonReload: {
+                width: 200,
+                justifyContent: 'center',
+                margin: 5,
+                backgroundColor: '#ff4961',
+                shadowOffset: {
+                    height: 0,
+                    width: 0
+                },
+                shadowOpacity: 0,
+                elevation: 0,
+                alignSelf: 'center'
+            }
+        })
+    };
+});

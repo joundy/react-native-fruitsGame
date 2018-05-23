@@ -1,0 +1,122 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  var _jsxFileName = "/home/neo/NodeJS/Rn/fruits/node_modules/react-navigation/src/navigators/createDrawerNavigator.js";
+
+  var _react = _require(_dependencyMap[0], "react");
+
+  var _react2 = _interopRequireDefault(_react);
+
+  var _reactNative = _require(_dependencyMap[1], "react-native");
+
+  var _reactNativeSafeAreaView = _require(_dependencyMap[2], "react-native-safe-area-view");
+
+  var _reactNativeSafeAreaView2 = _interopRequireDefault(_reactNativeSafeAreaView);
+
+  var _createNavigator = _require(_dependencyMap[3], "./createNavigator");
+
+  var _createNavigator2 = _interopRequireDefault(_createNavigator);
+
+  var _createNavigationContainer = _require(_dependencyMap[4], "../createNavigationContainer");
+
+  var _createNavigationContainer2 = _interopRequireDefault(_createNavigationContainer);
+
+  var _DrawerRouter = _require(_dependencyMap[5], "../routers/DrawerRouter");
+
+  var _DrawerRouter2 = _interopRequireDefault(_DrawerRouter);
+
+  var _DrawerScreen = _require(_dependencyMap[6], "../views/Drawer/DrawerScreen");
+
+  var _DrawerScreen2 = _interopRequireDefault(_DrawerScreen);
+
+  var _DrawerView = _require(_dependencyMap[7], "../views/Drawer/DrawerView");
+
+  var _DrawerView2 = _interopRequireDefault(_DrawerView);
+
+  var _DrawerNavigatorItems = _require(_dependencyMap[8], "../views/Drawer/DrawerNavigatorItems");
+
+  var _DrawerNavigatorItems2 = _interopRequireDefault(_DrawerNavigatorItems);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+  var defaultContentComponent = function defaultContentComponent(props) {
+    return _react2.default.createElement(
+      _reactNative.ScrollView,
+      {
+        alwaysBounceVertical: false,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17
+        }
+      },
+      _react2.default.createElement(
+        _reactNativeSafeAreaView2.default,
+        {
+          forceInset: {
+            top: 'always',
+            horizontal: 'never'
+          },
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 18
+          }
+        },
+        _react2.default.createElement(_DrawerNavigatorItems2.default, _extends({}, props, {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 19
+          }
+        }))
+      )
+    );
+  };
+
+  var DefaultDrawerConfig = {
+    drawerWidth: function drawerWidth() {
+      var _Dimensions$get = _reactNative.Dimensions.get('window'),
+          height = _Dimensions$get.height,
+          width = _Dimensions$get.width;
+
+      var smallerAxisSize = Math.min(height, width);
+      var isLandscape = width > height;
+      var isTablet = smallerAxisSize >= 600;
+      var appBarHeight = _reactNative.Platform.OS === 'ios' ? isLandscape ? 32 : 44 : 56;
+      var maxWidth = isTablet ? 320 : 280;
+      return Math.min(smallerAxisSize - appBarHeight, maxWidth);
+    },
+    contentComponent: defaultContentComponent,
+    drawerPosition: 'left',
+    drawerBackgroundColor: 'white',
+    useNativeAnimations: true
+  };
+
+  var DrawerNavigator = function DrawerNavigator(routeConfigs) {
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+    var mergedConfig = _extends({}, DefaultDrawerConfig, config);
+
+    var order = mergedConfig.order,
+        paths = mergedConfig.paths,
+        initialRouteName = mergedConfig.initialRouteName,
+        backBehavior = mergedConfig.backBehavior,
+        drawerConfig = _objectWithoutProperties(mergedConfig, ["order", "paths", "initialRouteName", "backBehavior"]);
+
+    var routerConfig = {
+      order: order,
+      paths: paths,
+      initialRouteName: initialRouteName,
+      backBehavior: backBehavior
+    };
+    var drawerRouter = (0, _DrawerRouter2.default)(routeConfigs, routerConfig);
+    var navigator = (0, _createNavigator2.default)(_DrawerView2.default, drawerRouter, drawerConfig);
+    return (0, _createNavigationContainer2.default)(navigator);
+  };
+
+  exports.default = DrawerNavigator;
+});

@@ -1,0 +1,103 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+  var _SwitchRouter = _require(_dependencyMap[0], "./SwitchRouter");
+
+  var _SwitchRouter2 = _interopRequireDefault(_SwitchRouter);
+
+  var _NavigationActions = _require(_dependencyMap[1], "../NavigationActions");
+
+  var _NavigationActions2 = _interopRequireDefault(_NavigationActions);
+
+  var _invariant = _require(_dependencyMap[2], "../utils/invariant");
+
+  var _invariant2 = _interopRequireDefault(_invariant);
+
+  var _withDefaultValue = _require(_dependencyMap[3], "../utils/withDefaultValue");
+
+  var _withDefaultValue2 = _interopRequireDefault(_withDefaultValue);
+
+  var _DrawerActions = _require(_dependencyMap[4], "./DrawerActions");
+
+  var _DrawerActions2 = _interopRequireDefault(_DrawerActions);
+
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+  exports.default = function (routeConfigs) {
+    var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    config = _extends({}, config);
+    config = (0, _withDefaultValue2.default)(config, 'resetOnBlur', false);
+    config = (0, _withDefaultValue2.default)(config, 'backBehavior', 'initialRoute');
+    var switchRouter = (0, _SwitchRouter2.default)(routeConfigs, config);
+    return _extends({}, switchRouter, {
+      getActionCreators: function getActionCreators(route, navStateKey) {
+        return _extends({
+          openDrawer: function openDrawer() {
+            return _DrawerActions2.default.openDrawer({
+              key: navStateKey
+            });
+          },
+          closeDrawer: function closeDrawer() {
+            return _DrawerActions2.default.closeDrawer({
+              key: navStateKey
+            });
+          },
+          toggleDrawer: function toggleDrawer() {
+            return _DrawerActions2.default.toggleDrawer({
+              key: navStateKey
+            });
+          }
+        }, switchRouter.getActionCreators(route, navStateKey));
+      },
+      getStateForAction: function getStateForAction(action, lastState) {
+        var state = lastState || _extends({}, switchRouter.getStateForAction(action, undefined), {
+          isDrawerOpen: false
+        });
+
+        var isRouterTargeted = action.key == null || action.key === state.key;
+
+        if (isRouterTargeted) {
+          if (action.type === _DrawerActions2.default.CLOSE_DRAWER && state.isDrawerOpen) {
+            return _extends({}, state, {
+              isDrawerOpen: false
+            });
+          }
+
+          if (action.type === _DrawerActions2.default.OPEN_DRAWER && !state.isDrawerOpen) {
+            return _extends({}, state, {
+              isDrawerOpen: true
+            });
+          }
+
+          if (action.type === _DrawerActions2.default.TOGGLE_DRAWER) {
+            return _extends({}, state, {
+              isDrawerOpen: !state.isDrawerOpen
+            });
+          }
+        }
+
+        var switchedState = switchRouter.getStateForAction(action, state);
+
+        if (switchedState === null) {
+          return null;
+        }
+
+        if (switchedState !== state) {
+          if (switchedState.index !== state.index) {
+            return _extends({}, switchedState, {
+              isDrawerOpen: false
+            });
+          }
+
+          return switchedState;
+        }
+
+        return state;
+      }
+    });
+  };
+});

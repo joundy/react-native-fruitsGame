@@ -1,0 +1,12 @@
+__d(function (global, _require, module, exports, _dependencyMap) {
+  module.exports = _require(_dependencyMap[0], "react-native/Libraries/Image/AssetRegistry").registerAsset({
+    "__packager_asset": true,
+    "httpServerLocation": "/assets/app/assets/fruits",
+    "width": 1001,
+    "height": 793,
+    "scales": [1],
+    "hash": "39bdd1bfd60d11b9116a481ff5b4ab6f",
+    "name": "3",
+    "type": "png"
+  });
+});
